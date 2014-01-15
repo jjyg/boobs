@@ -3,7 +3,7 @@
 # write BOOBS in the 'Contributions' panel of github
 # 52x7, tiled horizontal
 
-# PATCHME  c===8 
+# PATCHME c===8  
 
 word = <<EOS
 333   33   33  333   333  
@@ -28,7 +28,9 @@ if not File.directory?('.git')
 	commit_date = start_date + 3600 + rand(3600)
 else
 	# add new patches to existing history
-	commit_date = File.stat('.git').mtime
+	raise 'nope' unless `git log --format='%ci' -n 1` =~ /(\d+)-(\d+)-(\d+) (\d+):(\d+):(\d+)/
+	commit_date = Time.mktime($1, $2, $3, $4, $5, $6)
+
 	# commits at ~12:00 to avoid GMT etc issues
 	if commit_date.hour <= 10
 		commit_date += (12-commit_date.hour)*3600
@@ -66,6 +68,7 @@ while commit_date < now
 			system 'git', 'commit', '-q', '-m', 'boobs', '--date', commit_date_fmt, '.'
 		}
 	end
+	system 'git', 'gc', '-q'
 
 	commit_date += 24*3600 + rand(41) - 20
 end
