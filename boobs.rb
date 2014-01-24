@@ -3,7 +3,7 @@
 # write BOOBS in the 'Contributions' panel of github
 # 52x7, tiled horizontal
 
-# PATCHME c===8  
+# PATCHME  c===8 
 
 word = <<EOS
 333   33   33  333   333  
