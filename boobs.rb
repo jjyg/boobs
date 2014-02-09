@@ -3,7 +3,7 @@
 # write BOOBS in the 'Contributions' panel of github
 # 52x7, tiled horizontal
 
-# PATCHME c===8  
+# PATCHME  c===8 
 
 word = <<EOS
 333   33   33  333   333  
@@ -68,7 +68,8 @@ while commit_date < now
 			system 'git', 'commit', '-q', '-m', 'boobs', '--date', commit_date_fmt, '.'
 		}
 	end
-	system 'git', 'gc', '-q'
 
 	commit_date += 24*3600 + rand(41) - 20
 end
+
+system 'git', 'gc', '-q'
